@@ -50,9 +50,17 @@ export const countByNames = async (names) => {
 }
 
 export const findByMinScore = async (exam, minScore) => {
+    if (typeof exam !== 'string' || !exam.trim()) {
+        throw new Error('Invalid exam name');
+    }
+
+    if (typeof minScore !== 'number' || isNaN(minScore)) {
+        throw new Error('Invalid score value');
+    }
+
     const students = await repo.findStudentsByMinScore(exam, minScore);
     return students.map(student => {
         student.password = undefined;
         return student;
     });
-}
+};

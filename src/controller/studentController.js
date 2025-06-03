@@ -11,12 +11,16 @@ export const addStudent = async (req, res) => {
 }
 
 export const findStudent = async (req, res) => {
+    console.log("findStudent");
     const student = await service.findStudent(+req.params.id);
+    console.log("student")
     if (student) {
         res.json(student);
     } else {
         res.sendStatus(404);
     }
+
+
 }
 
 export const updateStudent = async (req, res) => {
